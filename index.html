@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Kenyan Excellence Awards</title>
+<title>Top Celebrities Award</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css" />
@@ -13,22 +13,23 @@
 <header class="site-header">
   <div class="wrap header-inner">
     <div class="brand">
-      <span class="brand-mark">KEA</span>
-      <span class="brand-name">Kenyan Excellence Awards</span>
+      <span class="brand-mark">TCA</span>
+      <span class="brand-name">Top Celebrities Award</span>
     </div>
     <nav class="header-nav">
       <a href="#categories">Categories</a>
       <a href="#results">Results</a>
-      
+      <a href="#about">About</a>
+      <a href="admin.html">Admin</a>
     </nav>
   </div>
 </header>
 
 <section class="hero">
   <div class="wrap hero-inner">
-    <p class="eyebrow">2026 Public Vote</p>
-    <h1>Celebrating Kenya's<br />Finest &amp; Their Fans</h1>
-    <p class="hero-sub">Cast your vote, no limit — results update live for everyone to see.</p>
+    <p class="ribbon">2026 Awards Season</p>
+    <h1>Top Celebrities Award<br /><em>Kenya's People's Choice</em></h1>
+    <p class="hero-sub">Vote for the stars shaping entertainment, media, and public life — by M-Pesa, in seconds.</p>
     <a class="btn btn-primary" href="#categories">Vote now</a>
   </div>
 </section>
@@ -37,6 +38,7 @@
 
   <section id="categories" class="section">
     <h2>Award categories</h2>
+    <button id="applyNominationBtn" class="btn btn-sponsor">🏆 Apply for Nomination</button>
     <div id="categoryList" class="section-list">
       <p class="muted">Loading categories…</p>
     </div>
@@ -45,7 +47,9 @@
   <section id="nominees" class="section hidden">
     <button id="backToCategories" class="btn-link">&larr; All categories</button>
     <h2 id="nomineeCategoryTitle"></h2>
-    <div id="prizeInfo" class="prize-info hidden"></div>
+    <div id="freeDayBanner" class="free-day-banner hidden"></div>
+    <button id="sponsorDayBtn" class="btn btn-sponsor">🎗️ Sponsor a Free Voting Day for this category</button>
+    <button id="applyNominationBtnInCategory" class="btn btn-sponsor">🏆 Apply for Nomination in this category</button>
     <div id="nomineeList" class="nominee-grid"></div>
   </section>
 
@@ -53,6 +57,14 @@
     <h2>Live results</h2>
     <p class="muted">Every vote is counted publicly and updates in real time.</p>
     <div id="resultsList"></div>
+  </section>
+
+  <section id="about" class="section about-section">
+    <h2>About Top Celebrities Award</h2>
+    <p>Top Celebrities Award (TCA) is a recognition platform created to celebrate the personalities who have made a meaningful impact through talent, creativity, influence, entertainment, and their connection with the public — bringing fans, celebrities, artists, creators, and industry professionals together in one place dedicated to celebrating excellence.</p>
+    <p>TCA is registered under Artisticals, which provides the foundation through which the awards are organized and presented — building a credible platform for recognition that goes beyond popularity, spanning music, acting, comedy, content creation, media, fashion, and digital entertainment.</p>
+    <p>Fans are central to it. Through nominations and premium voting, the public gets a direct voice in deciding who's recognized. Voting is paid, which funds the platform, verification, event production, and everything else needed to run a professional awards experience — while giving every supporter a way to actively stand behind their favorite nominee.</p>
+    <p>The goal is an exciting, transparent, professional annual awards experience — one where established stars and emerging personalities alike receive real recognition, and where fans get a genuine voice in celebrating the people they support.</p>
   </section>
 
 </main>
@@ -69,25 +81,71 @@
       <input id="voteCount" type="number" min="1" value="1" />
     </label>
 
-    <p class="total-line">Total: <strong id="voteTotal">KSh 20</strong></p>
+    <p class="total-line">Total: <strong id="voteTotal">KSh 10</strong></p>
 
     <label class="field">
       <span>M-Pesa phone number</span>
-      <input id="votePhone" type="tel" placeholder="2547XXXXXXXX" />
+      <input id="votePhone" type="tel" placeholder="07XXXXXXXX" />
     </label>
 
     <button id="submitVote" class="btn btn-primary btn-block">Pay with M-Pesa</button>
     <p id="voteStatus" class="vote-status"></p>
+  </div></div>
+
+<!-- Apply for Nomination modal -->
+<div id="nominationModal" class="modal hidden">
+  <div class="modal-card">
+    <button id="closeNominationModal" class="modal-close">&times;</button>
+    <h3>Apply for Nomination</h3>
+    <p class="prize-callout">🏆 Win up to <strong>KSh 500,000</strong> for reaching <strong>7,000 votes</strong> — KSh 20 per vote</p>
+    <p class="muted">KSh 200 application fee, paid via M-Pesa</p>
+
+    <label class="field"><span>Your full name</span><input id="nomName" placeholder="e.g. Jane Wanjiru" /></label>
+    <label class="field"><span>Category</span>
+      <select id="nomCategory"></select>
+    </label>
+    <label class="field"><span>Email (optional)</span><input id="nomEmail" type="email" placeholder="you@example.com" /></label>
+    <label class="field"><span>M-Pesa phone number (for the KSh 200 fee)</span><input id="nomPhone" type="tel" placeholder="07XXXXXXXX" /></label>
+    <label class="field"><span>WhatsApp number (for us to contact you)</span><input id="nomWhatsapp" type="tel" placeholder="07XXXXXXXX" /></label>
+
+    <button id="submitNomination" class="btn btn-primary btn-block">Pay with M-Pesa</button>
+    <button id="giveUpNomination" class="btn-link give-up-link">Give up</button>
+    <p id="nominationStatus" class="vote-status"></p>
+  </div>
+</div>
+
+<!-- Sponsor Free Voting Day modal -->
+<div id="sponsorModal" class="modal hidden">
+  <div class="modal-card">
+    <button id="closeSponsorModal" class="modal-close">&times;</button>
+    <h3>Sponsor a Free Voting Day</h3>
+    <p class="muted" id="sponsorCategoryLabel"></p>
+    <p class="muted">KSh 50,000 per day — free voting for this category only</p>
+
+    <label class="field">
+      <span>Number of days</span>
+      <input id="sponsorDays" type="number" min="1" value="1" />
+    </label>
+
+    <p class="total-line">Total: <strong id="sponsorTotal">KSh 50,000</strong></p>
+
+    <label class="field">
+      <span>M-Pesa phone number</span>
+      <input id="sponsorPhone" type="tel" placeholder="07XXXXXXXX" />
+    </label>
+
+    <button id="submitSponsor" class="btn btn-primary btn-block">Pay with M-Pesa</button>
+    <p id="sponsorStatus" class="vote-status"></p>
   </div>
 </div>
 
 <footer class="site-footer">
   <div class="wrap">
-    <p>&copy; 2026 Kenyan Excellence Awards. Payments processed via Paystack.</p>
+    <p>&copy; 2026 Top Celebrities Award. Payments processed via Paystack.</p>
   </div>
 </footer>
 
-<script>window.KEA_API_BASE = 'https://bc-pzh8.onrender.com/api';</script>
+<script>window.TCA_API_BASE = 'https://bc-pzh8.onrender.com/api';</script>
 <script src="js/app.js"></script>
 </body>
 </html>
