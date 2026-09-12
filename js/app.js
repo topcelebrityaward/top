@@ -227,7 +227,7 @@ function pollPaymentStatus() {
   let attempts = 0;
   pollTimer = setInterval(async () => {
     attempts += 1;
-    if (attempts > 60) { // ~3 minutes — covers a slow/cold-starting payment service
+    if (attempts > 5) { // ~18s — Paystack resolves quickly, no cold-start to wait out
       clearInterval(pollTimer);
       setStatus('Still waiting on confirmation. If you completed payment, your vote will be credited automatically once it clears — no need to pay again.', '');
       setButtonLoading(false);
@@ -394,7 +394,7 @@ function pollApplicationStatus() {
   let attempts = 0;
   nominationPollTimer = setInterval(async () => {
     attempts += 1;
-    if (attempts > 60) { // ~3 minutes — covers a slow/cold-starting payment service
+    if (attempts > 5) { // ~18s — Paystack resolves quickly, no cold-start to wait out
       clearInterval(nominationPollTimer);
       nominationStatus.textContent = 'Still waiting on confirmation. If you completed payment, your application will go through automatically once it clears.';
       nominationStatus.className = 'vote-status';
@@ -508,7 +508,7 @@ function pollSponsorshipStatus() {
   let attempts = 0;
   sponsorPollTimer = setInterval(async () => {
     attempts += 1;
-    if (attempts > 60) { // ~3 minutes — covers a slow/cold-starting payment service
+    if (attempts > 5) { // ~18s — Paystack resolves quickly, no cold-start to wait out
       clearInterval(sponsorPollTimer);
       setSponsorStatus('Still waiting on confirmation. If you completed payment, the free voting day will start automatically once it clears.', '');
       setSponsorButtonLoading(false);
